@@ -1,0 +1,198 @@
+\documentclass[11pt,a4paper,notitlepage,openright]{article}
+%bruk report for kapittelinndeling
+
+%tilpass for norske forhold, det er jo en fordel at æ, ø og å virker uten å måtte bruke spesialkoder for dem
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage[norsk]{babel}% kommenter ut om du skriver på engelsk
+\usepackage[norsk,english]{babel} 
+
+
+%\usepackage[left=2.5cm,right=2.5cm, bottom=2.5cm, top=2.5cm]{geometry}  % See geometry.pdf to learn the layout options. There are lots.
+%\geometry{b5paper}                        % ... or a4paper or a5paper or ...
+%\geometry{landscape}                      % Activate for for rotated page geometry
+\setlength{\marginparwidth}{2cm}
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+%\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{multirow}
+\usepackage{footmisc}
+\usepackage{wrapfig}
+\usepackage[section]{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+%\usepackage{subeqn}
+\usepackage{pdflscape} %for landscape pages
+\usepackage{longtable}
+\usepackage{appendix}
+\usepackage[textsize=small,disable]{todonotes}
+%Enable working in multiple files
+\usepackage{subfiles}
+% Syntax highlighting
+\usepackage{listings}
+\usepackage{minted}
+\usemintedstyle{vs}
+\usepackage{color}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+%bruk mindre kapitteloverskrifter
+\usepackage[small]{titlesec}
+\usepackage{fancyhdr}
+
+\usepackage{ifthen}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Command for jumping to even page 
+\newcommand{\newevenside}{
+        \ifthenelse{\isodd{\thepage}}{\newpage}{
+        \newpage
+        \phantom{placeholder} % doesn't appear on page
+        \thispagestyle{empty} % if want no header/footer
+        \newpage
+        }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Citations config
+\usepackage[numbers]{natbib}
+\renewcommand{\bibname}{References}
+
+\def\biblio{ %Define for bibliography
+\clearpage
+%\addcontentsline{toc}{chapter}{References} % may need changing if documentclass is article
+\bibliographystyle{plainnat}
+\bibliography{library} 	%komma-separert liste over .bib-filer. Ikke ta med .bib i navnet.
+\thispagestyle{empty}
+
+%\listoftodos
+}
+%\AtBeginDocument{\renewcommand{\harvardand}{og}} % For norske referanser (bytter ut 'and' med 'og'
+%Importer hele pdf sider (eg, tidligere utskrifter print)
+
+\usepackage[final]{pdfpages}
+\usepackage{caption}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{
+   bookmarksnumbered,
+   pdfstartview={FitH},
+   citecolor={black},
+   linkcolor={black},
+   urlcolor={black},
+   pdfpagemode={UseOutlines}
+}
+\usepackage{cleveref}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+
+%Forside
+\title{TMA4265 - Stochastic Processes\\
+\vspace*{0.5cm}
+\Large{\textit{Semester Project}}}
+
+\author{Candidate numbers\\
+111111}
+
+%% Commands for including references and toc in subfiles when compiled
+%% without including them more than once when including main tex-file
+\def\bibliosub{\biblio \listoftodos} %Workaround to have references in subfiles.
+\def\subtoc{\tableofcontents}
+
+\begin{document}
+\def\bibliosub{} %Do not include references in subfiles when compiling main document.
+\def\subtoc{}
+
+%!TEX encoding = UTF-8 Unicode
+
+\maketitle  %make front page
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pages before toc use roman page numbering %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{1}    %Romersk nummerering
+\pagenumbering{roman}
+\pagestyle{plain}
+
+%% Subfiles included before toc
+%\subfile{00-001-problem.tex}
+
+% Litt luft etter forsiden
+\cleardoublepage
+
+%%%%%%%%%%%%%%%
+% Iclude toc
+%\tableofcontents
+%\listoffigures   % to produce list of figures
+
+% Litt luft etter TOC
+%\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Entering main part of document.					  %
+% Changing pagestyle and using arabic page numbering  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{{\leftmark}}}
+\fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
+ 
+\setcounter{page}{1}    %Vanlig nummerering     
+\pagenumbering{arabic}
+
+\setlength{\headheight}{15pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Including chapters 
+\subfile{problem-1.tex}
+\subfile{problem-2.tex}
+
+\begin{thebibliography}{00}
+\bibitem{paper} Sheldon M. Ross (2010), Introduction to Probability Models.
+\end{thebibliography}
+
+%% Inserting reference list
+\thispagestyle{empty}
+%\bibliokp
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Entering appendix part.     %
+% Using roman page numbering  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Including appendices
+
+
+
+%\subfile{app-paramtable.tex}
+%\subfile{app-sourcecode.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List of todos is only included if the %
+% 'disable' parameter is not set in the %
+% todolist package.                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoftodos
+
+\end{document}
