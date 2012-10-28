@@ -52,7 +52,7 @@
   \label{markov}
 \end{figure}
 
-The Markov chain $P_{ij}$ in \ref{markov} describes a random walk. Starting in any state, you can reach any other state - i.e. all states communicate. 
+The Markov chain $P_{ij}$ in \cref{markov} describes a random walk. Starting in any state, you can reach any other state - i.e. all states communicate. 
 Thus, $P_{ij}$ is \textbf{strongly connected}, has \textbf{one equivalence class} and is \textbf{irreducible}. 
 Let $X_n$ and $X_{n+s}$ be two states such that there are $s-1$ intermediate states between them. 
 To get from state $i$ to $j=i+s$ you have to visit all intermediate states at least once\footnote{Equivalently, $s$ is the minimum number of steps you must preform to make the transition from state $i$ to $i+s$}. 
@@ -66,17 +66,107 @@ The greatest common divisor of the elements in $N_i$ is called the period $d$ of
 Since $P^{n}_{00} > 0$ for any $n$, $N_i = 0, 1, 2, ...$ and so $P_{00}$ has a period of $d=1$. Since periodicity is a class property, the chain as a whole has period one. 
 A Markov chain with $d=1$ is called \textbf{aperiodic}.
 
-A positive recurrent aperiodic chain is called \textbf{ergodic}. According to Theorem 4.1 in \cite{ross},
+A positive recurrent aperiodic chain is called \textbf{ergodic}. 
+Theorem 4.1 in \cite{ross} states that for an irreducible ergodic Markov chain the limit $\pi_j = \lim_{n \to \infty}P^n_{ij}$, $j \geq 0$ exists, 
+
+\begin{equation}
+\label{ergo1}
+ \pi_{j} = \sum^{\infty}_{i = 0} \pi_{i} P_{ij}
+\end{equation}
+
+and 
+
+\begin{equation}
+\label{ergo2}
+ \sum^{\infty}_{j = 0} \pi_{j} = 1.
+\end{equation}
+
+In this case \cref{ergo1} becomes
+
+\begin{align}
+\label{pi_i}
+  \pi_{i} = \left\{ 
+  \begin{array}{l l l}
+    \pi_{i-1} P_{i-1,i} + \pi_{i+1} P_{i+1,i} &= \pi_{i-1} p^i + \pi_{i+1} (1-p^{i+2}) & \quad i>0\\
+    \pi_{i} P_{i,i} + \pi_{i+1} P_{i+1,i} &= \pi_{0}(1-p) + \pi_{1}(1-p) & \quad i=0\\
+  \end{array} \right.
+\end{align}
+
+The $\pi$'s are called the limiting probabilities that the process will be in state $i$ at time $n$, and it can be shown that $\pi_i$ also equals the long-run proportion of time that the process will be in state $i$. Below the limiting probabilities are calculated for the first 3 states.
+
+\begin{align*}
+\pi_1 =  \frac{p}{1-p^2} \pi_0; \quad
+\pi_2 =  \frac{p^2}{1-p^3} \pi_1; \quad
+\pi_3 =  \frac{p^3}{1-p^4} \pi_2
+\end{align*}
+
+By induction this yields the general formula (recurrence relation)
+
+\begin{equation}
+\label{pi_i}
+\begin{aligned}
+\pi_{i+1} =  \frac{p^{i+1}}{1-p^{i+2}} \pi_{i}
+  &= \frac{p^{i+1}p^{i}p^{i-1} \cdots p^{2} p^{1}}{(1-p^{i+2})(1-p^{i+1})(1-p^{i}) \cdots (1-p^{3})(1-p^{2})} \pi_{0} \\
+  &= \frac{p^{1+2+...+(i-1)+i+(i+1)}}{\prod_{i=2}^{k=i+2} (1-p^{k})} \pi_{0} 
+  = \frac{p^{\frac{1}{2}(i+1)(i+2)}}{\prod_{i=2}^{k=i+2} (1-p^{k})} \pi_{0} \\
+  \text{or, equivalently,} \\
+\pi_{i} &= \pi_{0} \cdot \prod_{k=1}^{k=i+1}  \frac{p^k}{1-p^{k+1}}
+ \end{aligned}
+\end{equation}
+
+Now \cref{ergo2} becomes
+
+\begin{equation}
+\label{pi_start}
+\begin{aligned}
+\sum_i \pi_{i} &= \pi_{0} \left(1 + \sum_i \cdot \prod_{k=1}^{k=i+1}  \frac{p^k}{1-p^{k+1}} \right) = 1 \\
+\implies
+\pi_{0} &= \left(1 + \sum_i \cdot \prod_{k=1}^{k=i+1}  \frac{p^k}{1-p^{k+1}} \right)^{-1}
+\end{aligned}
+\end{equation}
+
+Substituting \cref{pi_start} into \cref{pi_i} gives an expression for the limiting probabilities
+
+\begin{equation}
+\pi_{i} = \frac{\prod_{k=1}^{k=i+1}  \frac{p^k}{1-p^{k+1}}}{1 + \sum_i \cdot \prod_{k=1}^{k=i+1}  \frac{p^k}{1-p^{k+1}}} 
+\end{equation}
 
 
+The distribution is positive so the limiting probabilities exist and the states are indeed positive recurrent. 
 
 
+\subsection*{b.}
+
+Let the set $\xi$ contain the first 10 states, and let $T_i$ be the time spent to reach state 10, starting in state $X_0 = i \in \xi$. 
 
 
+\begin{equation}
+\label{exp_time}
+\begin{aligned}
+ \mu_i &= E[T_i] \\
+       &= E[T_{i}|X_1 = i-1]P(X_1=i-1) + E[T_{i}|X_1 = i+1]P(X_1=i+1) \\
+       &= ( 1+E[T_{i-1}] )( 1-p^{i+1} ) + ( 1+E[T_{i+1}] )p^{i+1} \\
+       &= 1 + \mu_{i-1} + ( \mu_{i+1} - \mu_{i-1} )p^{i+1}
+\end{aligned}
+\end{equation}
+
+Note the special cases for $\mu_0 = 1 + \mu_0 + (\mu_1 - \mu_0)p$, and $\mu_9 = 1 + \mu_8(1-p^{10})$
+
+\cref{exp_time} constitutes a set of 10 equations that can be solved with \textsc{matlab}. 
+In table <TABLE> the solutions are listed for $p=0.75$ and $p=0.90$.
+
+% Table
+% here
+
+The exponetial decay for the probabilities for moving on to the next state  clearly manifests itself for the case of $p=0.75$; no matter what state you start in, you'll have to wait for a very long time to reach state 10. The transition from state 9 to 10 is taking very long time compared to the other one-step transitions. 
 
 
+\subsection*{c.}
+
+The probability for ever reaching state 100 is 1, no matter what state you start in. If your starting state is $X_0<100$, you'll have to wait a very long time, and if $X_0>100$ you'll have to wait close to $X_0 - 100$ steps (at least if not $p \approx 1$).
 
 
+\subsection*{d.}
 
 
 
