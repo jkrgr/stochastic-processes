@@ -35,6 +35,8 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% For better looking tables
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
 
 \documentclass[00-main.tex]{subfiles}
 \begin{document}
@@ -42,10 +44,79 @@
 
 \section*{Problem Two}
 
-\subsection*{a.}
+In the following $X_n$ is the number of individuals in the $n$'th generation,
+ $X_0$ is the initial population, $\mu = E[$\textit{children per individual}$]$, $p_j = P\{$\textit{an individual has }$j$\textit{ offspring}$\}$. The distributions that are analyzed are listed in \cref{p-values}
+ 
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+  \noalign{\smallskip}
+  \head{ } & \head{$p_0$} & \head{$p_1$} & \head{$p_2$} & \head{$p_3$}\\
+  \hline
+  \noalign{\smallskip}
+  \textbf{I} & 0.6 & 0.05 & 0.15 & 0.2 \\
+  \textbf{II} & 0.25 & 0.60 & 0.10 & 0.05 \\
+  \hline
+\end{tabular}
+\caption{The probability distributions given in Problem Two.}
+\label{p-values}
+\end{table}
 
+Chapter 4.7 in \cite{ross} presents some results that is used in this problem. Below is some properties of branching processes discussed.
+
+Generally, the mean number, and the variance, off offspring of a single individual is
+
+\begin{equation}
+\mu = \sum_{j=0}^{\infty} jP_j \quad; \quad \quad \sigma^2 = \sum_{j=0}^{\infty} (j-\mu)^2P_j
+\end{equation}
+
+respectively.
+
+For both our distributions $\mu = 0.95$ and since $\mu < 1$ the population will eventually die out. Defining $Z_i$ to be the number of offspring of the $i$'th individual for the $(n-1)$-st generation, one can find 
+
+\begin{equation}
+X_n = \sum_{i=1}^{X_{n-1}} Z_i
+\end{equation}
+
+in the edge case where $X_0=1$. One can then obtain
+
+\begin{equation}
+E[X_n] = E[E[X_n | X_{n-1}]] = E\left[ E\left[ \sum_{i=1}^{X_{n-1}} Z_i | X_{i-1} \right] \right] = E[X_{n-1}] \mu 
+\end{equation}
+
+which leads to the result
+
+\begin{equation}
+E[X_1] = \mu, \quad E[X_2] = \mu E[X_1] = \mu^2, \quad \cdots, \quad E[X_n] = \mu^n.
+\end{equation}
+
+It can then be shown that the variance is
+
+\begin{align}
+\label{variance}
+  Var(X_n) = \left\{ 
+  \begin{array}{l l l}
+     \sigma^2 \mu^{n-1} \cdot \frac{1-\mu^n}{1-\mu}, \quad &\mu \neq 1\\
+     n \sigma^2, \quad  &\mu = 1 \\
+  \end{array} \right.
+\end{align}
+
+The estimated mean value and standard deviation is given by
+
+\begin{equation}
+\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i, \qquad S^2 = \frac{1}{n-1}\sum_{i=1}^{n} X_i - \bar{X},
+\end{equation}
+
+respectively. 
+
+\subsection*{a.}
+The mean value and the standard deviation of $X_n$ is found. First analytically, then using simulations, and at last a comparison.
+
+\subsubsection{Analytical results}
 --
 
-
+\subsubsection{Simulated results}
+--
 
 \end{document}
