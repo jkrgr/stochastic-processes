@@ -168,6 +168,49 @@ The probability for ever reaching state 100 is 1, no matter what state you start
 
 \subsection*{d.}
 
+\begin{minted}{matlab}
+hold on;
+%%% A ten-step illustrated random walks, p=0.90
+% Starting in state 0
+plot(randwalk(20,0,0.9), "1", \
+randwalk(20,0,0.9), "2", randwalk(20,0,0.9), "3" )
+% Starting in state 5
+plot(randwalk(20,5,0.9), "1", \
+randwalk(20,5,0.9), "2", randwalk(20,5,0.9), "3" )
+% Starting in state 9
+plot(randwalk(20,9,0.9), "1", \
+randwalk(20,9,0.9), "2", randwalk(20,9,0.9), "3" )
+
+%%% p=0.75
+% Starting in state 0
+plot(randwalk(20,0,0.75), "1", \
+randwalk(20,0,0.75), "2", randwalk(20,0,0.75), "3" )
+% Starting in state 5
+plot(randwalk(20,5,0.75), "1", \
+randwalk(20,5,0.75), "2", randwalk(20,5,0.75), "3" )
+% Starting in state 9
+plot(randwalk(20,9,0.75), "1", \
+randwalk(20,9,0.75), "2", randwalk(20,9,0.75), "3" )
+
+\end{minted}
+
+Notice the difference between $p=0.90$ and $p=0.75$ in \cref{randwalk1,randwalk2}.
+\begin{figure}[!htbp]
+  \includegraphics[width=\textwidth/2]{randwalk0.png}
+  \includegraphics[width=\textwidth/2]{randwalk5.png}
+  \includegraphics[width=\textwidth/1]{randwalk9.png}
+  \caption{A 20-step random walk w. $p=0.90$ starting with state 0, 5 and 9, respectively.}
+  \label{randwalk1}
+\end{figure}
+
+
+\begin{figure}[!htbp]
+  \includegraphics[width=\textwidth/2]{randwalk0_75.png}
+  \includegraphics[width=\textwidth/2]{randwalk5_75.png}
+  \includegraphics[width=\textwidth/1]{randwalk9_75.png}
+  \caption{A 20-step random walk w. $p=75$ starting with state 0, 5 and 9, respectively.}
+  \label{randwalk2}
+\end{figure}
 
 
 \end{document}

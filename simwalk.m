@@ -1,33 +1,23 @@
-function W = randwalk(N,i,p)
+function S = simwalk(s,N,i,p)
 
-% ----// randwalk.m //---- 
+% ----// simwalk.m //---- 
 %
-% Simulates a random walk 
+% Simulates several random walks
 %
 % 
 %  Input:  
-%    N - int, number of transitions
-%    i - int, initial state  
+%    N - int, number of simulations to run
 %    p - double, 0<p<1, probability.
+%    s - int, number of steps
+%    i - int, initial state
 %
 %  Output:
-%    w - vector, with transtions.
+%    S - matrix whith a random walk in each row.
 %
 % ------------------------- 
 
-W = zeros(1,N+1);
-W(1) = i;
-for j=1:N
-  r=rand(1);
-  % Walk to the right
-  if W(j) >= 0 && r < p^(W(j)+1)
-    W(j+1) = W(j) + 1;
-  % Walk to the left
-  elseif W(j) > 0
-    W(j+1) = W(j)-1;
-  else
-    W(j+1) = 0
-  end
-end
+S = zeros(N,s);
+for i=1:N
+  S(i,:) = randwalk(s,i,p);
 end
 

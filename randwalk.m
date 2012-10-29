@@ -1,4 +1,4 @@
-function W = randwalk(N,i,p)
+function W = randwalk(T,i,p)
 
 % ----// randwalk.m //---- 
 %
@@ -6,7 +6,7 @@ function W = randwalk(N,i,p)
 %
 % 
 %  Input:  
-%    N - int, number of transitions
+%    T - int, number of transitions
 %    i - int, initial state  
 %    p - double, 0<p<1, probability.
 %
@@ -15,19 +15,23 @@ function W = randwalk(N,i,p)
 %
 % ------------------------- 
 
-W = zeros(1,N+1);
+W = zeros(1,T);
 W(1) = i;
-for j=1:N
+s = i; % current state s
+
+for t=1:T
   r=rand(1);
   % Walk to the right
-  if W(j) >= 0 && r < p^(W(j)+1)
-    W(j+1) = W(j) + 1;
+  if r <= p^(s+1)
+    W(t) = s+1;
+    s = s+1;
   % Walk to the left
-  elseif W(j) > 0
-    W(j+1) = W(j)-1;
-  else
-    W(j+1) = 0
+  elseif s>0
+    W(t) = s-1;
+    s=s-1;
+  % Return to state 0
   end
 end
 end
+
 
