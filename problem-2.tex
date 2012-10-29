@@ -65,7 +65,7 @@ In the following $X_n$ is the number of individuals in the $n$'th generation,
 
 Chapter 4.7 in \cite{ross} presents some results that are used in this problem. Below is some properties of branching processes discussed.
 
-Generally, the mean number, and the variance, off offspring of a single individual is
+Generally, the mean number, and the variance, of offspring of a single individual is
 
 \begin{equation}
 \label{meanvar}
@@ -74,7 +74,7 @@ Generally, the mean number, and the variance, off offspring of a single individu
 
 respectively.
 
-For both our distributions $\mu = 0.95$, and since $\mu < 1$ the population will eventually die out. Defining $Z_i$ to be the number of offspring of the $i$'th individual for the $(n-1)$st generation, one can find 
+For both our distributions $\mu = 0.95$, and since $\mu < 1$ the population will eventually die out. Defining $Z_i$ to be the number of offspring of the $i$'th individual for the $(n-1)$th generation, one can find 
 
 \begin{equation}
 X_n = \sum_{i=1}^{X_{n-1}} Z_i
@@ -89,6 +89,7 @@ E[X_n] = E[E[X_n | X_{n-1}]] = E\left[ E\left[ \sum_{i=1}^{X_{n-1}} Z_i | X_{i-1
 which leads to the result
 
 \begin{equation}
+\label{mean}
 E[X_1] = \mu, \quad E[X_2] = \mu E[X_1] = \mu^2, \quad \cdots, \quad E[X_n] = \mu^n.
 \end{equation}
 
@@ -113,7 +114,7 @@ respectively.
 
 \subsection*{a.}
 
-The mean and standard deviation is found analytically from \cref{meanvar} and \cref{variance}, and is presented in \cref{anatable}.
+The mean and standard deviation is found analytically from \cref{meanvar}, \cref{mean} and \cref{variance}, and is presented in \cref{anatable}.
 
 \begin{table}[!htbp]
 \centering
@@ -133,25 +134,33 @@ The mean and standard deviation is found analytically from \cref{meanvar} and \c
 \end{table}
 
 
-The branching process was simulated one million times for each of the probability distributions. The values in \cref{simtable} was computed by running
+The branching process was simulated a hundred thousand times for each of the probability distributions. The values in \cref{simtable} were computed by running
 
 \begin{minted}{matlab}
-branchtrials(1000000, 1, [0.60 0.05 0.15 0.20]);
-branchtrials(1000000, 1, [0.25 0.60 0.10 0.05]);
+% No. of simulations
+N = 100000;
+% Size of the first population
+init = 1;
+% Distribution I = p1 and II = p2
+p1 = [0.60 0.05 0.15 0.20];
+p2 = [0.25 0.60 0.10 0.05];
+% Run the simulations for I and II
+branchtrials(N, init, p1);
+branchtrials(N, init, p2);
 \end{minted}
 
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{ccccc}
+\begin{tabular}{ccccccc}
   \hline
   \noalign{\smallskip}
-  $n$ & $E_I[X_n]$ &$E_{II}[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$   \\
+  $n$ & $E_I[X_n]$ &$E_{II}[X_n]$ &$E_{III}[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$ & $SD_{III}[X_n]$   \\
   \hline
   \noalign{\smallskip}
-  10   & 0.6007 & 0.5989 & 2.8099 & 1.6645     \\
-  100  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
-  1000 & 0 & 0 & 0 & 0    \\
+  10   & 0.6007 & 0.5989 & 0.0554 & 2.8099 & 1.6708 & 0.4662 \\
+  100  & 0.0060 & 0.0050 & 0      & 0.4583 & 0.2392 & 0      \\
+  1000 & 0      & 0      & 0      & 0      & 0      & 0      \\
   \hline
 \end{tabular}
 \caption{Simulated values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
@@ -160,45 +169,60 @@ branchtrials(1000000, 1, [0.25 0.60 0.10 0.05]);
 
 The simulated values is indeed very close to the ones found analytically for both distributions. Given that the \textsc{matlab} rand()-function is uniform, the simulated values would probably become even more accurate if the number of simulations is increased. No simulation ever reached $n=1000$, but this is only natural considering the low probability for that to happen. 
 
-(i), (ii) and (iii) are presented in 
+Case (i), (ii) and (iii) are presented in \cref{simtable2} for both distributions.
 
 \begin{table}[!htbp]
 \centering
-\begin{tabular}{ccccc}
+\begin{tabular}{ccccccc}
   \hline
   \noalign{\smallskip}
-   & \multicolumn{2}{c|}{Distribution I} & \multicolumn{2}{c}{Distribution II} \\
-  \head{Case} & $E[\cdot]$ &$SD[\cdot]$ & $ E[\cdot]$ &$SD[\cdot]$   \\
+   & \multicolumn{2}{c|}{Distribution I} & \multicolumn{2}{c|}{Distribution II} & \multicolumn{2}{c}{Distribution III} \\
+  \head{Case} & $E[\cdot]$ &$SD[\cdot]$ & $ E[\cdot]$ &$SD[\cdot]$ & $ E[\cdot]$ &$SD[\cdot]$ \\
   \hline
   \noalign{\smallskip}
-  (i)   & 0.6007 & 0.5989 & 2.8099 & 1.6645     \\
-  (ii)  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
-  (iii)  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
+  (i)    & 4.5197 & 7.1409    &    8.2460 & 10.8820   & 3.5185 & 2.5587\\
+  (ii)   & 19.9991 & 109.4967 &    19.9830 & 65.9630  & 3.9787 & 7.0344\\
+  (iii)  & 2.9699 & 5.4466    &    2.3411 & 2.9429    & 1.5572 & 1.1611\\
   \hline
 \end{tabular}
 \caption{Simulated values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
 \label{simtable2}
 \end{table}
 
-\textbf{(i) Number of generations until the population dies}
+\subsection{b.}
+
+\begin{minted}{matlab}
+% Defining a third distribution
+p3 = [0.50 0.30 0.15 0.05];
+% Run the simulations for III
+branchtrials(N, init, p3);
+\end{minted}
+
+\begin{figure}[!htbp]
+  \includegraphics[width=\textwidth/2]{p1/gen.png}
+  \includegraphics[width=\textwidth/2]{p1/pop.png}
+  \includegraphics[width=\textwidth/1]{p1/largest.png}
+  \caption{Case (i), (ii) and (iii) for distribution I}
+  \label{I}
+\end{figure}
 
 
+\begin{figure}[!htbp]
+  \includegraphics[width=\textwidth/2]{p2/gen.png}
+    \includegraphics[width=\textwidth/2]{p2/pop.png}
+  \includegraphics[width=\textwidth/1]{p2/largest.png}
+  \caption{Case (i), (ii) and (iii) for distribution II}
+  \label{II}
+\end{figure}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{figure}[!htbp]
+  \includegraphics[width=\textwidth/2]{p3/gen.png}
+    \includegraphics[width=\textwidth/2]{p3/pop.png}
+  \includegraphics[width=\textwidth/1]{p3/largest.png}
+  \caption{Case (i), (ii) and (iii) for distribution III}
+  \label{III}
+\end{figure}
 
 
 
