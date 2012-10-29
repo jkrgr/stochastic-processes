@@ -63,17 +63,18 @@ In the following $X_n$ is the number of individuals in the $n$'th generation,
 \label{p-values}
 \end{table}
 
-Chapter 4.7 in \cite{ross} presents some results that is used in this problem. Below is some properties of branching processes discussed.
+Chapter 4.7 in \cite{ross} presents some results that are used in this problem. Below is some properties of branching processes discussed.
 
 Generally, the mean number, and the variance, off offspring of a single individual is
 
 \begin{equation}
-\mu = \sum_{j=0}^{\infty} jP_j \quad; \quad \quad \sigma^2 = \sum_{j=0}^{\infty} (j-\mu)^2P_j
+\label{meanvar}
+\mu = \sum_{j=0}^{\infty} jP_j \quad \quad \text{and} \quad \quad \sigma^2 = \sum_{j=0}^{\infty} (j-\mu)^2P_j
 \end{equation}
 
 respectively.
 
-For both our distributions $\mu = 0.95$ and since $\mu < 1$ the population will eventually die out. Defining $Z_i$ to be the number of offspring of the $i$'th individual for the $(n-1)$-st generation, one can find 
+For both our distributions $\mu = 0.95$, and since $\mu < 1$ the population will eventually die out. Defining $Z_i$ to be the number of offspring of the $i$'th individual for the $(n-1)$st generation, one can find 
 
 \begin{equation}
 X_n = \sum_{i=1}^{X_{n-1}} Z_i
@@ -102,7 +103,7 @@ It can then be shown that the variance is
   \end{array} \right.
 \end{align}
 
-The estimated mean value and standard deviation is given by
+When doing simulations, the estimated mean value and standard deviation is given by
 
 \begin{equation}
 \bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i, \qquad S^2 = \frac{1}{n-1}\sum_{i=1}^{n} X_i - \bar{X},
@@ -113,10 +114,29 @@ respectively.
 \subsection*{a.}
 The mean value and the standard deviation of $X_n$ is found. First analytically, then using simulations, and at last a comparison.
 
-\subsubsection{Analytical results}
---
+\subsubsection{Analytic results}
+The mean and standard deviation is found analytically from \cref{meanvar} and \cref{variance} and is presented in \cref{anatable}.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+  \noalign{\smallskip}
+  \head{Generation} &     \\
+        $n$         & $E[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$   \\
+  \hline
+  \noalign{\smallskip}
+  10   & 0.5987 & 2.7977 & 2.7692 &    \\
+  100  & 0.0059 & 0.4379 & 0.0678 &    \\
+  1000 & 5.2912e-23 & 4.1529e-11 & 2.4697e-11 &    \\
+  \hline
+\end{tabular}
+\caption{Analytical values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
+\label{anatable}
+\end{table}
+
 
 \subsubsection{Simulated results}
---
+
 
 \end{document}
