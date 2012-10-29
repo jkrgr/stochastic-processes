@@ -61,6 +61,10 @@ print('-dpdf','pop.pdf');
 bar(xout3,n3/N);
 figure(3);
 %print('-dpdf','largest.pdf');
-print('-depsc','p1/largest.eps');
+%print('-depsc','p1/largest.eps');
+print -depsc2 figplot.eps;
+print -deps figplot2.eps;
+print('-r500','-depsc2', 'figplot3');
+print -dpng figplot.png;
 
 end
