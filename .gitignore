@@ -10,8 +10,6 @@ octave-core
 *.synctex.gz
 *.toc
 *.out
-*.pdf*
-*.pdf.*
 *.log*
 *.aux*
 *.ebl*
