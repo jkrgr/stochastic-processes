@@ -36,6 +36,9 @@ std(tht(:,1)), std(tht(:,2)), std(tht(:,3))
 disp('(i)    No. of generations: ')
 mean(gen_sizes)
 std(gen_sizes)
+a=hist(gen_sizes, N);
+bar = a/N;
+xlim([0,30]);
 
 disp('(ii)   Total population')
 mean(pop_sizes)

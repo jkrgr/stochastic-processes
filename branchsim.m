@@ -41,9 +41,9 @@ while popu(n) > 0
     end
   end
   tot_people = tot_people + popu(n+1);
-  if largest_gen < popu(n+1)
-    largest_gen = popu(n+1);
-  end
-  n=n+1;
-end
-end
+      if largest_gen < popu(n+1)
+        largest_gen = popu(n+1);
+      end
+      n=n+1;
+    end
+    end
