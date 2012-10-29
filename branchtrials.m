@@ -45,26 +45,20 @@ disp('(iii)  Maximum number of individuals')
 mean(largest_gens)
 std(largest_gens)
 
-%f=plot_histograms(gen_sizes, pop_sizes, largest_gens, N);
-
-[n1, xout1] = hist(gen_sizes,40);
+% Plotting
+[n1, xout1] = hist(gen_sizes,20);
 bar(xout1, n1/N);
 figure(1);
-print('-dpdf','gen.pdf');
+print('-dpng','p3/gen.png');
 
-[n2,xout2] = hist(pop_sizes, 40);
+[n2,xout2] = hist(pop_sizes, 20);
 bar(xout2,n2/N);
 figure(2);
-print('-dpdf','pop.pdf');
+print('-dpng','p3/pop.png');
 
-[n3, xout3] = hist(largest_gens, 40);
+[n3, xout3] = hist(largest_gens, 20);
 bar(xout3,n3/N);
 figure(3);
-%print('-dpdf','largest.pdf');
-%print('-depsc','p1/largest.eps');
-print -depsc2 figplot.eps;
-print -deps figplot2.eps;
-print('-r500','-depsc2', 'figplot3');
-print -dpng figplot.png;
+print('-dpng','p3/largest.png');
 
 end
