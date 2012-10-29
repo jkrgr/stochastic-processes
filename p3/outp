@@ -1,0 +1,66 @@
+>> branchtrials(N,init,p3);   
+Mean: 10, 100, 1000:
+
+ans =
+
+    0.0554
+
+
+ans =
+
+     0
+
+
+ans =
+
+     0
+
+Standard deviation: 10, 100, 1000:
+
+ans =
+
+    0.4662
+
+
+ans =
+
+     0
+
+
+ans =
+
+     0
+
+(i)    No. of generations: 
+
+ans =
+
+    3.5185
+
+
+ans =
+
+    2.5587
+
+(ii)   Total population
+
+ans =
+
+    3.9787
+
+
+ans =
+
+    7.0344
+
+(iii)  Maximum number of individuals
+
+ans =
+
+    1.5572
+
+
+ans =
+
+    1.1611
+
