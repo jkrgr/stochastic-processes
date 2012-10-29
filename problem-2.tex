@@ -112,10 +112,8 @@ When doing simulations, the estimated mean value and standard deviation is given
 respectively. 
 
 \subsection*{a.}
-The mean value and the standard deviation of $X_n$ is found. First analytically, then using simulations, and at last a comparison.
 
-\subsubsection{Analytic results}
-The mean and standard deviation is found analytically from \cref{meanvar} and \cref{variance} and is presented in \cref{anatable}.
+The mean and standard deviation is found analytically from \cref{meanvar} and \cref{variance}, and is presented in \cref{anatable}.
 
 \begin{table}[!htbp]
 \centering
@@ -135,14 +133,13 @@ The mean and standard deviation is found analytically from \cref{meanvar} and \c
 \end{table}
 
 
-\subsubsection{Simulated results}
-
-The values in \cref{comptable} was found by running
+The branching process was simulated one million times for each of the probability distributions. The values in \cref{simtable} was computed by running
 
 \begin{minted}{matlab}
 branchtrials(1000000, 1, [0.60 0.05 0.15 0.20]);
 branchtrials(1000000, 1, [0.25 0.60 0.10 0.05]);
 \end{minted}
+
 
 \begin{table}[!htbp]
 \centering
@@ -160,6 +157,30 @@ branchtrials(1000000, 1, [0.25 0.60 0.10 0.05]);
 \caption{Simulated values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
 \label{simtable}
 \end{table}
+
+The simulated values is indeed very close to the ones found analytically for both distributions. Given that the \textsc{matlab} rand()-function is uniform, the simulated values would probably become even more accurate if the number of simulations is increased. No simulation ever reached $n=1000$, but this is only natural considering the low probability for that to happen. 
+
+(i), (ii) and (iii) are presented in 
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+  \noalign{\smallskip}
+   & \multicolumn{2}{c|}{Distribution I} & \multicolumn{2}{c}{Distribution II} \\
+  \head{Case} & $E[\cdot]$ &$SD[\cdot]$ & $ E[\cdot]$ &$SD[\cdot]$   \\
+  \hline
+  \noalign{\smallskip}
+  (i)   & 0.6007 & 0.5989 & 2.8099 & 1.6645     \\
+  (ii)  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
+  (iii)  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
+  \hline
+\end{tabular}
+\caption{Simulated values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
+\label{simtable2}
+\end{table}
+
+\textbf{(i) Number of generations until the population dies}
 
 
 

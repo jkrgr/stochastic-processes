@@ -22,18 +22,26 @@ tht = zeros(2000,3);
 trials = zeros(N, 2000);
 
 for i=1:N
-  [trials(i,:), gens(i), largest(i)] = branchsim(init,dist);
+  [trials(i,:), gen_sizes(i), pop_sizes(i), largest_gens(i)] = branchsim(init,dist);
   tht(i,1) = trials(i,11);
   tht(i,2) = trials(i,101);
   tht(i,3) = trials(i,1001);
 end
 
-disp('Mean: \n10, 100, 1000:')
+disp('Mean: 10, 100, 1000:')
 mean(tht(:,1)), mean(tht(:,2)), mean(tht(:,3))
-disp('Standard deviation: \n10, 100, 1000:')
-std(tht(1,:)), std(tht(2,:)), std(tht(3,:))
+disp('Standard deviation: 10, 100, 1000:')
+std(tht(:,1)), std(tht(:,2)), std(tht(:,3))
 
-disp('No. of generations: ')
-mean(gens)
-std(gens)
+disp('(i)    No. of generations: ')
+mean(gen_sizes)
+std(gen_sizes)
+
+disp('(ii)   Total population')
+mean(pop_sizes)
+std(pop_sizes)
+
+disp('(iii)  Maximum number of individuals')
+mean(largest_gens)
+std(largest_gens)
 end
