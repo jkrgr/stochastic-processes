@@ -168,6 +168,8 @@ The probability for ever reaching state 100 is 1, no matter what state you start
 
 \subsection*{d.}
 
+\textsc{matlab} is here used to illustrate some random walks.
+
 \begin{minted}{matlab}
 hold on;
 %%% A ten-step illustrated random walks, p=0.90
@@ -194,7 +196,7 @@ randwalk(20,9,0.75), "2", randwalk(20,9,0.75), "3" )
 
 \end{minted}
 
-Notice the difference between $p=0.90$ and $p=0.75$ in \cref{randwalk1,randwalk2}.
+Notice the difference between $p=0.90$ and $p=0.75$ in \cref{randwalk1,randwalk2}. Walking with $p=0.75$ does indeed pull you down towards state 0.
 \begin{figure}[!htbp]
   \includegraphics[width=\textwidth/2]{randwalk0.png}
   \includegraphics[width=\textwidth/2]{randwalk5.png}
@@ -211,6 +213,31 @@ Notice the difference between $p=0.90$ and $p=0.75$ in \cref{randwalk1,randwalk2
   \caption{A 20-step random walk w. $p=75$ starting with state 0, 5 and 9, respectively.}
   \label{randwalk2}
 \end{figure}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+  \noalign{\smallskip}
+  j & $\pi_j$ & $\bar{\pi_j}$ & \multicolumn{2}{c|}{C.I.} \\
+  \hline
+  \noalign{\smallskip}
+  0   & .1669 & 0.1677 & .1666  & .1688  \\
+  1   & .2861 & 0.2867 & .2856  & .2877  \\
+  2   & .2789  & .2774 & .2767  & .2782  \\
+  3   & .1718  & .1708 & .1699  & .1717  \\
+  4   & .0713  & .0714 & .0706  & .0721  \\
+  5   & .0206  & .0205 & .0201  & .0210  \\
+  6   & .0042  & .0042 & .0040  & .0044  \\
+  7   & .0006  & .0006 & .0005  & .0006  \\
+  8   & .0001  & .0001 & .0000  & .0001  \\
+  9   &   0    &   0   &    0   &   0    \\
+  10  &   0    &   0   &    0   &   0    \\
+\hline
+\end{tabular}
+\caption{The analytical and simulated limiting probabilities for the first 11 states are shown together with the corresponding 95\% confidence interval.}
+\label{lim_p}
+\end{table}
 
 
 \end{document}
