@@ -122,8 +122,7 @@ The mean and standard deviation is found analytically from \cref{meanvar} and \c
 \begin{tabular}{ccccc}
   \hline
   \noalign{\smallskip}
-  \head{Generation} &     \\
-        $n$         & $E[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$   \\
+  $n$ & $E[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$   \\
   \hline
   \noalign{\smallskip}
   10   & 0.5987 & 2.7977 & 2.7692 &    \\
@@ -137,6 +136,49 @@ The mean and standard deviation is found analytically from \cref{meanvar} and \c
 
 
 \subsubsection{Simulated results}
+
+The values in \cref{comptable} was found by running
+
+\begin{minted}{matlab}
+branchtrials(1000000, 1, [0.60 0.05 0.15 0.20]);
+branchtrials(1000000, 1, [0.25 0.60 0.10 0.05]);
+\end{minted}
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{ccccc}
+  \hline
+  \noalign{\smallskip}
+  $n$ & $E_I[X_n]$ &$E_{II}[X_n]$ & $SD_I[X_n]$ & $SD_{II}[X_n]$   \\
+  \hline
+  \noalign{\smallskip}
+  10   & 0.6007 & 0.5989 & 2.8099 & 1.6645     \\
+  100  & 0.0060 & 0.0060 & 0.4346 & 0.2582     \\
+  1000 & 0 & 0 & 0 & 0    \\
+  \hline
+\end{tabular}
+\caption{Simulated values of the mean $E[X_n]$ and the standard deviation, SD ($=Var^{\frac{1}{2}}[X_n]$) for distribution I and II.}
+\label{simtable}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
