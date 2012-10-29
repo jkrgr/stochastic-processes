@@ -50,16 +50,16 @@ std(largest_gens)
 [n1, xout1] = hist(gen_sizes,25);
 bar(xout1, n1/N);
 figure(1);
-print -depsc2 gen_sizes.eps;
+print('-dpdf','gen.pdf');
 
 [n2,xout2] = hist(pop_sizes, 25);
 bar(xout2,n2/N);
 figure(2);
-print -depsc2 pop_sizes.eps;
+print('-dpdf','pop.pdf');
 
 [n3, xout3] = hist(largest_gens, 25);
 bar(xout3,n3/N);
 figure(3);
-print -depsc2 largest_gens.eps;
+print('-dpdf','largest.pdf');
 
 end
