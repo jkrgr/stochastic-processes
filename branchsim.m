@@ -23,15 +23,15 @@ cumdist = cumsum(dist);
 len = length(dist);
 % Generation number n
 n = 1;
-biggest_pop = 0;
+biggest_pop = 0;;
 while popu(n) > 0
   popu(n+1) = 0;
   for j=1:popu(n)
-    random = rand(1);
+    randomm = rand(1);
     for k=0:len-1
-      if random < cumdist(k+1)
+      if randomm < cumdist(k+1)
         % Update the population of generation n+1
-        popu(n+1) += k;
+        popu(n+1) =popu(n+1)+ k;
         break;
       end
     end
@@ -39,7 +39,7 @@ while popu(n) > 0
   if popu(n+1) > biggest_pop
     biggest_pop = popu(n+1);
   end
-  ++n;
+  n=n+1;
 end
 gens = n;
 end
