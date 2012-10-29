@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is how you write code:
+%
+% \begin{minted}{matlab}
+% foo = [2 1 0;1 4 3;2 4.5 6];
+% \end{minted}
+%
+
+% This is how you import code:
+% 
+% \inputminted[linenos]{matlab}{foo_bar.m}
+%
+ 
+% Most figures are imported this way:
+%
+% \begin{figure}
+% \includegraphics[width=\textwidth]{foo_figure}
+% \caption{This is a caption}
+% \end{figure}
+
+% This is a matrix:
+%
+% \begin{equation}
+% H =
+%  \left[
+%  \begin{matrix}
+%    1 & 2 &  3 &  4 \\ 
+%    5 & 6 &  7 &  8 \\ 
+%    0 & 9 & 10 & 11 \\ 
+%    0 & 0 & 12 &  0
+%  \end{matrix} 
+% \right]
+%\end{equation}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For better looking tables
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+
+\section*{Problem Two}
+
+\inputminted[linenos]{matlab}{branchsim.m}
+
+\end{document}
