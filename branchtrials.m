@@ -1,8 +1,9 @@
-function popu = branchtrials(N,init,dist)
+function f = branchtrials(N,init,dist)
 
 % ----// branchtrials.m //---- 
 %
-% Simulates a branching process 
+% Accumulates simulated branching processes
+% to do statistical analysis over them.
 %
 % 
 %  Input:  
@@ -12,7 +13,7 @@ function popu = branchtrials(N,init,dist)
 %           distribution [p0, ..., pn]  
 %
 %  Output:
-%    popu - vector, population for each generation.
+%    prints histograms of the calculations.
 %
 % ---------------------------- 
 

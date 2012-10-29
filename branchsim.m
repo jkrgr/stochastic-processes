@@ -12,6 +12,9 @@ function [popu, n, tot_people, largest_gen] = branchsim(init, dist)
 %
 %  Output:
 %    popu - vector, population for each generation.
+%    n    - int, number of generations
+%    tot_people  - int, total number of people lived.
+%    largest_gen - int, size of the largest generation.
 %
 % ------------------------- 
 
