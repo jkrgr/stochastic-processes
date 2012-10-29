@@ -60,6 +60,7 @@ print('-dpdf','pop.pdf');
 [n3, xout3] = hist(largest_gens, 40);
 bar(xout3,n3/N);
 figure(3);
-print('-dpdf','largest.pdf');
+%print('-dpdf','largest.pdf');
+print('-depsc','p1/largest.eps');
 
 end
