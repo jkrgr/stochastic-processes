@@ -15,9 +15,9 @@ function [popu, gens, biggest_pop] = branchsim(init, dist)
 %
 % ------------------------- 
 
-
+popu = zeros(1,2000);
 % The population of the 1st generation
-popu(1) = init;
+popu(1) = 1;
 % Accumulated probabilities to be used w. rand(1)
 cumdist = cumsum(dist);
 len = length(dist);
@@ -27,13 +27,23 @@ biggest_pop = 0;;
 while popu(n) > 0
   popu(n+1) = 0;
   for j=1:popu(n)
-    randomm = rand(1);
-    for k=0:len-1
-      if randomm < cumdist(k+1)
+    r = rand(1);
+    %{
+    for k=0:(len-1)
+      if r < cumdist(k+1)
         % Update the population of generation n+1
         popu(n+1) =popu(n+1)+ k;
         break;
       end
+      %}
+    if r < cumdist(1)
+      popu(n+1) = popu(n+1) + 0;
+    elseif r < cumdist(2)
+      popu(n+1) = popu(n+1) + 1;
+    elseif r < cumdist(3)
+      popu(n+1) = popu(n+1) + 2;
+    else
+      popu(n+1) = popu(n+1) + 3;
     end
   end
   if popu(n+1) > biggest_pop
